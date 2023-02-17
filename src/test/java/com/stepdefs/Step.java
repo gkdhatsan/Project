@@ -1,5 +1,7 @@
 package com.stepdefs;
 
+import io.cucumber.java.en.And;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -37,32 +39,20 @@ public class Step {
 			
 	}
 
-	/*
-	 * @Given("User Enter ganesh and kumar") public void
-	 * user_enter_ganesh_and_kumar() { WebElement userName =
-	 * driver.findElement(By.id("username")); userName.sendKeys(ganesh); WebElement
-	 * password = driver.findElement(By.id("password")); password.sendKeys("kumar");
-	 * 
-	 * }
-	 * 
-	 * 
-	 * @Given("User Enter bala and murugan") public void
-	 * user_enter_bala_and_murugan() {
-	 * 
-	 * WebElement userName = driver.findElement(By.id("username"));
-	 * userName.sendKeys("aresh"); WebElement password =
-	 * driver.findElement(By.id("password")); password.sendKeys("waran");
-	 * 
-	 * 
-	 * }
-	 */
-
-
 
 	@When("Perform Login")
 	public void perform_login() {
 		WebElement login = driver.findElement(By.id("login"));
 		login.click();
+
+	}
+
+	@When("verify Login Error message {string}")
+	public void verify_login_error_message(String string) {
+		WebElement error = driver.findElement(By.xpath("//div[@class='auth_error']"));
+		//String message = error.getText();
+		String message = error.getText();
+		Assert.assertEquals(string ,message);
 
 	}
 
